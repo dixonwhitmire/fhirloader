@@ -29,6 +29,9 @@ def _load_resource(
         family_name = data["name"][0]["family"]
         given_name = data["name"][0]["given"][0]
         search_term = {"name": [family_name, given_name]}
+    elif resource_name == "Coverage":
+        search_term = {"identifier": data["identifier"][0]["value"]}
+
 
     response = search_func(f"{fhir_url}/{resource_name}", params=search_term)
     response.raise_for_status()
